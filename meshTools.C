@@ -1,0 +1,92 @@
+#include "meshTools.H"
+
+scalarArray initialiseMeshArray(
+    const arrayLabel meshDim[2],
+    const arrayLabel dir)
+{
+    // Create the array of all zeros
+    scalarArray grid = initialiseScalarArray(meshDim);
+
+    // Switch determining direction
+    switch (dir)
+    {
+        // Compute mesh points in x direction if dir = 1
+    case 1:
+        for (arrayLabel i = 0; i < meshDim[0]; i++)
+        {
+            for (arrayLabel j = 0; j < meshDim[1]; j++)
+            {
+                grid[i][j] = scalarVariable(i) / scalarVariable(meshDim[0] - 1);
+            }
+        }
+        break;
+
+        // Compute mesh points in y direction if dir = 2
+    case 2:
+        for (arrayLabel i = 0; i < meshDim[0]; i++)
+        {
+            for (arrayLabel j = 0; j < meshDim[1]; j++)
+            {
+                grid[i][j] = scalarVariable(j) / scalarVariable(meshDim[1] - 1);
+            }
+        }
+        break;
+
+        // Otherwise nothing
+    default:
+        break;
+    }
+
+    return grid;
+}
+
+void computeMeshSpacing(
+    scalarArray &gridSpacing,
+    const scalarArray &grid,
+    const arrayLabel meshDim[2],
+    const arrayLabel dir)
+{
+    // Switch determining direction
+    switch (dir)
+    {
+        // Compute central difference in x direction if dir = 1
+    case 1:
+        // Boundary points
+        for (arrayLabel j = 0; j < meshDim[1]; j++)
+        {
+            gridSpacing[0][j] = grid[1][j] - grid[0][j];
+            gridSpacing[meshDim[0] - 1][j] = grid[meshDim[0] - 1][j] - grid[meshDim[0] - 2][j];
+        }
+        // Interior points
+        for (arrayLabel i = 1; i < meshDim[0] - 1; i++)
+        {
+            for (arrayLabel j = 0; j < meshDim[1]; j++)
+            {
+                gridSpacing[i][j] = 0.5 * (grid[i + 1][j] - grid[i - 1][j]);
+            }
+        }
+        break;
+
+        // Compute central difference in y direction if dir = 2
+    case 2:
+        // Boundary points
+        for (arrayLabel i = 0; i < meshDim[0]; i++)
+        {
+            gridSpacing[i][0] = grid[i][1] - grid[i][0];
+            gridSpacing[i][meshDim[1] - 1] = grid[i][meshDim[1] - 1] - grid[i][meshDim[1] - 2];
+        }
+        // Interior points
+        for (arrayLabel i = 0; i < meshDim[0]; i++)
+        {
+            for (arrayLabel j = 1; j < meshDim[1] - 1; j++)
+            {
+                gridSpacing[i][j] = 0.5 * (grid[i][j + 1] - grid[i][j - 1]);
+            }
+        }
+        break;
+
+        // Otherwise nothing
+    default:
+        break;
+    }
+}
