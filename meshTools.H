@@ -6,12 +6,12 @@
 
 scalarArray initialiseMeshArray(
     const arrayLabel meshDim[2],
-    const arrayLabel dir);
+    const bool dir);
 
 void computeMeshSpacing(
     scalarArray &gridSpacing,
     const scalarArray &grid,
     const arrayLabel meshDim[2],
-    const arrayLabel dir);
+    const bool dir);
 
 #endif

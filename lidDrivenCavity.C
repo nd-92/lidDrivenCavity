@@ -1,3 +1,4 @@
+// Includes
 #include "omegaPsiFormulation.H"
 #include "IOControl.H"
 #include "scalarArrays.H"
@@ -7,7 +8,7 @@
 // Dimensions of grid
 const arrayLabel meshDim[2] = {101, 101};
 
-// Some parameters
+// Reynolds number and time step
 const scalarVariable Re = 1;
 const scalarVariable dt = 0.00001;
 
@@ -18,20 +19,20 @@ scalarArray psi = initialiseScalarArray(meshDim);
 scalarArray psi_ = initialiseScalarArray(meshDim);
 
 // Initialise the mesh arrays
-scalarArray x = initialiseMeshArray(meshDim, 1);
-scalarArray y = initialiseMeshArray(meshDim, 2);
+scalarArray x = initialiseMeshArray(meshDim, 0);
+scalarArray y = initialiseMeshArray(meshDim, 1);
 scalarArray dx = initialiseScalarArray(meshDim);
 scalarArray dy = initialiseScalarArray(meshDim);
 
-// Initialise the convergence control arrays
+// Run time control
 scalarLine rowMax = initialiseScalarLine(meshDim[0]);
 scalarLine currentRow = initialiseScalarLine(meshDim[1]);
 
 int main()
 {
     // Get finite difference grid spacing
-    computeMeshSpacing(dx, x, meshDim, 1);
-    computeMeshSpacing(dy, y, meshDim, 2);
+    computeMeshSpacing(dx, x, meshDim, 0);
+    computeMeshSpacing(dy, y, meshDim, 1);
 
     // Begin timing of execution
     scalarVariable startTime = getWallTime();
@@ -62,6 +63,10 @@ int main()
 
     // Print elapsed time to terminal
     printElapsedTime(startTime, endTime);
+
+    // Write solution quantity to file
+    writeScalarArray("omega", omega, meshDim);
+    writeScalarArray("psi", psi, meshDim);
 
     return 0;
 }
