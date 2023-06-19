@@ -23,7 +23,7 @@ void writeScalarArray(
 {
     // Open .dat file and set write precision
     ofstream toWrite;
-    const string writeName = fileName + ".dat";
+    const string writeName = "solution/" + fileName + ".dat";
     toWrite.open(writeName);
     toWrite << setprecision(100);
 
