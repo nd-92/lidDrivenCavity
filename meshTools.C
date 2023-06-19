@@ -2,16 +2,14 @@
 
 scalarArray initialiseMeshArray(
     const arrayLabel meshDim[2],
-    const arrayLabel dir)
+    const bool dir)
 {
     // Create the array of all zeros
     scalarArray grid = initialiseScalarArray(meshDim);
 
-    // Switch determining direction
-    switch (dir)
+    // Compute mesh points in x direction if dir = 0
+    if (dir == false)
     {
-        // Compute mesh points in x direction if dir = 1
-    case 1:
         for (arrayLabel i = 0; i < meshDim[0]; i++)
         {
             for (arrayLabel j = 0; j < meshDim[1]; j++)
@@ -19,10 +17,10 @@ scalarArray initialiseMeshArray(
                 grid[i][j] = scalarVariable(i) / scalarVariable(meshDim[0] - 1);
             }
         }
-        break;
-
-        // Compute mesh points in y direction if dir = 2
-    case 2:
+    }
+    // Compute mesh points in y direction if dir = 1
+    else
+    {
         for (arrayLabel i = 0; i < meshDim[0]; i++)
         {
             for (arrayLabel j = 0; j < meshDim[1]; j++)
@@ -30,11 +28,6 @@ scalarArray initialiseMeshArray(
                 grid[i][j] = scalarVariable(j) / scalarVariable(meshDim[1] - 1);
             }
         }
-        break;
-
-        // Otherwise nothing
-    default:
-        break;
     }
 
     return grid;
@@ -44,13 +37,11 @@ void computeMeshSpacing(
     scalarArray &gridSpacing,
     const scalarArray &grid,
     const arrayLabel meshDim[2],
-    const arrayLabel dir)
+    const bool dir)
 {
-    // Switch determining direction
-    switch (dir)
+    // Compute central difference in x direction if dir = 0
+    if (dir == false)
     {
-        // Compute central difference in x direction if dir = 1
-    case 1:
         // Boundary points
         for (arrayLabel j = 0; j < meshDim[1]; j++)
         {
@@ -65,10 +56,10 @@ void computeMeshSpacing(
                 gridSpacing[i][j] = 0.5 * (grid[i + 1][j] - grid[i - 1][j]);
             }
         }
-        break;
-
-        // Compute central difference in y direction if dir = 2
-    case 2:
+    }
+    // Compute central difference in y direction if dir = 1
+    else
+    {
         // Boundary points
         for (arrayLabel i = 0; i < meshDim[0]; i++)
         {
@@ -83,10 +74,5 @@ void computeMeshSpacing(
                 gridSpacing[i][j] = 0.5 * (grid[i][j + 1] - grid[i][j - 1]);
             }
         }
-        break;
-
-        // Otherwise nothing
-    default:
-        break;
     }
 }

@@ -7,6 +7,11 @@ void printScalarArray(
     const scalarArray &f,
     const arrayLabel meshDim[2]);
 
+void writeScalarArray(
+    const string fileName,
+    const scalarArray &f,
+    const arrayLabel meshDim[2]);
+
 inline void printElapsedTime(
     const scalarVariable &startTime,
     const scalarVariable &endTime)
