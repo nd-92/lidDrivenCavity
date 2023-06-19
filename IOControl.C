@@ -22,7 +22,8 @@ void writeScalarArray(
     const arrayLabel meshDim[2])
 {
     ofstream toWrite;
-    toWrite.open(fileName);
+    const string writeName = fileName + ".dat";
+    toWrite.open(writeName);
     toWrite << setprecision(100);
     for (unsigned i = 0; i < meshDim[0]; i++)
     {
