@@ -33,12 +33,14 @@ scalarArray initialiseMeshArray(
     return grid;
 }
 
-void computeMeshSpacing(
-    scalarArray &gridSpacing,
+scalarArray computeMeshSpacing(
     const scalarArray &grid,
     const arrayLabel meshDim[2],
     const bool dir)
 {
+    // Create the array of all zeros
+    scalarArray gridSpacing = initialiseScalarArray(meshDim);
+
     // Compute central difference in x direction if dir = 0
     if (dir == false)
     {
@@ -75,4 +77,6 @@ void computeMeshSpacing(
             }
         }
     }
+
+    return gridSpacing;
 }

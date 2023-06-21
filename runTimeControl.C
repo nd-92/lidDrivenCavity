@@ -39,8 +39,6 @@ void getResidual(
     scalarLine &rowMax,
     scalarLine &currentRow)
 {
-    // vector<scalarVariable> rowMax(meshDim[0]);
-    // vector<scalarVariable> currentRow(meshDim[1]);
     for (arrayLabel i = 0; i < meshDim[0]; i++)
     {
         for (arrayLabel j = 0; j < meshDim[1]; j++)

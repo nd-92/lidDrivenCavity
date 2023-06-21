@@ -26,4 +26,12 @@ void omegaPsiIntegrator(
     const scalarVariable &dt,
     const scalarVariable &Re);
 
+void streamFunctionToVelocity(
+    scalarArray &u,
+    scalarArray &v,
+    const scalarArray &psi,
+    const scalarArray &dx,
+    const scalarArray &dy,
+    const arrayLabel meshDim[2]);
+
 #endif

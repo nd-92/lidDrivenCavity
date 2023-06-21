@@ -5,7 +5,7 @@
 
 // Iteration control
 static arrayLabel runTimeIterator = 0;
-static const arrayLabel maxIterations = 1000000;
+static const arrayLabel maxIterations = 100000000;
 
 // Convergence control
 static scalarVariable residualError = 1;

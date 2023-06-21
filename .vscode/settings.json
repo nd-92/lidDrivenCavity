@@ -42,6 +42,7 @@
         "iomanip": "cpp",
         "meshTools.C": "cpp",
         "scalarArrays.C": "cpp",
-        "runTimeControl.C": "cpp"
+        "runTimeControl.C": "cpp",
+        "omegaPsiFormulation.C": "cpp"
     }
 }
