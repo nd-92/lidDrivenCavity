@@ -10,13 +10,13 @@ void boundaryConditions(
     // Top boundary
     for (arrayLabel i = 0; i < meshDim[0]; i++)
     {
-        omega[i][meshDim[1] - 1] = (-2 * psi[i][meshDim[1] - 1] / (pow(dy[i][0], 2))) - (2 / dy[i][0]);
+        omega[i][meshDim[1] - 1] = (-2 * psi[i][meshDim[1] - 2] / (pow(dy[i][meshDim[1] - 1], 2))) - (2 / dy[i][meshDim[1] - 1]);
     }
 
     // Bottom boundary
     for (arrayLabel i = 0; i < meshDim[0]; i++)
     {
-        omega[i][0] = -2 * psi[i][1] / (pow(dy[i][meshDim[1] - 1], 2));
+        omega[i][0] = -2 * psi[i][1] / (pow(dy[i][0], 2));
     }
 
     // Left boundary

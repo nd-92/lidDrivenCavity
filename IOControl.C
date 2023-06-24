@@ -4,6 +4,7 @@ void printScalarArray(
     const scalarArray &f,
     const arrayLabel meshDim[2])
 {
+    cout << setprecision(15);
     // Loop over all indices printing value of array
     for (arrayLabel i = 0; i < meshDim[0]; i++)
     {

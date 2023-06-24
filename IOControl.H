@@ -16,7 +16,7 @@ inline void printElapsedTime(
     const scalarVariable &startTime,
     const scalarVariable &endTime)
 {
-    scalarVariable elapsedTime = endTime - startTime;
+    const scalarVariable elapsedTime = endTime - startTime;
     std::cout << "Main solver loop elapsed time: " << elapsedTime << " seconds" << endl;
 }
 

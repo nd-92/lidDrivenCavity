@@ -6,11 +6,11 @@
 #include "runTimeControl.H"
 
 // Dimensions of grid
-const arrayLabel meshDim[2] = {251, 251};
+const arrayLabel meshDim[2] = {1001, 1001};
 
 // Reynolds number and time step
-const scalarVariable Re = 10;
-const scalarVariable dt = 0.000001;
+const scalarVariable Re = 1;
+const scalarVariable dt = 1e-8;
 
 // Initialise the solution arrays
 scalarArray omega = initialiseScalarArray(meshDim);
@@ -46,8 +46,8 @@ int main()
         omegaPsiIntegrator(omega, omega_, psi, psi_, dx, dy, meshDim, dt, Re);
 
         // Get vorticity residual
-        getResidual(residualError, omega, omega_, meshDim, rowMax, currentRow);
-        printScalarVariable(residualError);
+        // getResidual(residualError, omega, omega_, meshDim, rowMax, currentRow);
+        // printScalarVariable(residualError);
 
         // Advance iterator
         runTimeIterator++;
@@ -55,6 +55,8 @@ int main()
 
     // Finish timing of execution
     scalarVariable endTime = getWallTime();
+
+    printScalarArray(omega, meshDim);
 
     // Print elapsed time to terminal
     printElapsedTime(startTime, endTime);
