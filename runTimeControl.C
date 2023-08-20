@@ -1,5 +1,8 @@
 #include "runTimeControl.H"
 
+arrayLabel runTimeIterator = 0;
+scalarVariable residualError = 1;
+
 bool runTime(
     const arrayLabel &i,
     const arrayLabel &maxIterations,

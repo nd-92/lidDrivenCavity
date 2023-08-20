@@ -6,7 +6,7 @@
 #include "runTimeControl.H"
 
 // Dimensions of grid
-const arrayLabel meshDim[2] = {1001, 1001};
+const arrayLabel meshDim[2] = {101, 101};
 
 // Reynolds number and time step
 const scalarVariable Re = 1;
@@ -46,8 +46,8 @@ int main()
         omegaPsiIntegrator(omega, omega_, psi, psi_, dx, dy, meshDim, dt, Re);
 
         // Get vorticity residual
-        // getResidual(residualError, omega, omega_, meshDim, rowMax, currentRow);
-        // printScalarVariable(residualError);
+        getResidual(residualError, omega, omega_, meshDim, rowMax, currentRow);
+        printScalarVariable(residualError);
 
         // Advance iterator
         runTimeIterator++;

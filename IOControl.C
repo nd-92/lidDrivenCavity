@@ -4,17 +4,16 @@ void printScalarArray(
     const scalarArray &f,
     const arrayLabel meshDim[2])
 {
-    cout << setprecision(15);
-    // Loop over all indices printing value of array
+    //  Loop over all indices printing value of array
     for (arrayLabel i = 0; i < meshDim[0]; i++)
     {
         for (arrayLabel j = 0; j < meshDim[1]; j++)
         {
-            cout << f[i][j] << " ";
+            printf("%0.15f ", f[i][j]);
         }
-        cout << endl;
+        printf("\n");
     }
-    cout << endl;
+    printf("\n");
 }
 
 void writeScalarArray(
@@ -29,9 +28,9 @@ void writeScalarArray(
     toWrite << setprecision(100);
 
     // Loop over all indices printing value of array
-    for (unsigned i = 0; i < meshDim[0]; i++)
+    for (arrayLabel i = 0; i < meshDim[0]; i++)
     {
-        for (unsigned j = 0; j < meshDim[1]; j++)
+        for (arrayLabel j = 0; j < meshDim[1]; j++)
         {
             toWrite << f[i][j] << " ";
         }

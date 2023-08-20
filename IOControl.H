@@ -23,7 +23,7 @@ inline void printElapsedTime(
 inline void printScalarVariable(
     const scalarVariable f)
 {
-    cout << setprecision(15) << f << endl;
+    printf("%0.15f\n", f);
 }
 
 #endif

@@ -42,7 +42,7 @@ scalarArray computeMeshSpacing(
     scalarArray gridSpacing = initialiseScalarArray(meshDim);
 
     // Compute central difference in x direction if dir = 0
-    if (dir == false)
+    if (dir == 0)
     {
         // Boundary points
         for (arrayLabel j = 0; j < meshDim[1]; j++)

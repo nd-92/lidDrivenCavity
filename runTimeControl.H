@@ -4,13 +4,13 @@
 #include "globalHeader.H"
 
 // Iteration control
-static arrayLabel runTimeIterator = 0;
+extern arrayLabel runTimeIterator;
 static const arrayLabel maxIterations = 100000000;
 // static const arrayLabel maxIterations = 1000;
 
 // Convergence control
-static scalarVariable residualError = 1;
-static const scalarVariable solutionTolerance = 1e-12;
+extern scalarVariable residualError;
+static const scalarVariable solutionTolerance = 1e-6;
 
 bool runTime(
     const arrayLabel &i,
