@@ -3,29 +3,34 @@
 
 #include "globalHeader.H"
 
-// Iteration control
-extern arrayLabel runTimeIterator;
-static const arrayLabel maxIterations = 100000000;
-// static const arrayLabel maxIterations = 1000;
-
-// Convergence control
-extern scalarVariable residualError;
-static const scalarVariable solutionTolerance = 1e-6;
-
-bool runTime(
+inline bool runTime(
     const arrayLabel &i,
     const arrayLabel &maxIterations,
     const scalarVariable &residualError,
-    const scalarVariable &solutionTolerance);
+    const scalarVariable &solutionTolerance)
+{
+    return (i < maxIterations && residualError > solutionTolerance);
+}
 
 scalarVariable getWallTime();
 
-void getResidual(
+inline void getResidual(
     scalarVariable &residualError,
     const scalarArray &f,
     const scalarArray &f_,
     const arrayLabel meshDim[2],
     scalarLine &rowMax,
-    scalarLine &currentRow);
+    scalarLine &currentRow)
+{
+    for (arrayLabel i = 0; i < meshDim[0]; i++)
+    {
+        for (arrayLabel j = 0; j < meshDim[1]; j++)
+        {
+            currentRow[j] = fabs(f[i][j] - f_[i][j]);
+        }
+        rowMax[i] = *max_element(currentRow.begin(), currentRow.end());
+    }
+    residualError = *max_element(rowMax.begin(), rowMax.end());
+}
 
 #endif

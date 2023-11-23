@@ -17,13 +17,13 @@ inline void printElapsedTime(
     const scalarVariable &endTime)
 {
     const scalarVariable elapsedTime = endTime - startTime;
-    std::cout << "Main solver loop elapsed time: " << elapsedTime << " seconds" << endl;
+    cout << "Main solver loop elapsed time: " << elapsedTime << " seconds" << endl;
 }
 
 inline void printScalarVariable(
     const scalarVariable f)
 {
-    printf("%0.15f\n", f);
+    static_cast<void>(printf("%0.15f\n", f));
 }
 
 #endif

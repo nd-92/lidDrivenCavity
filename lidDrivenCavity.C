@@ -6,7 +6,7 @@
 #include "runTimeControl.H"
 
 // Dimensions of grid
-const arrayLabel meshDim[2] = {101, 101};
+const arrayLabel meshDim[2] = {51, 51};
 
 // Reynolds number and time step
 const scalarVariable Re = 1;
@@ -28,13 +28,21 @@ const scalarArray dy = computeMeshSpacing(y, meshDim, 1);
 scalarLine rowMax = initialiseScalarLine(meshDim[0]);
 scalarLine currentRow = initialiseScalarLine(meshDim[1]);
 
+// Iteration control
+arrayLabel runTimeIterator_ = 0;
+const arrayLabel maxIterations_ = 100000000;
+
+// Convergence control
+scalarVariable residualError_ = 1;
+const scalarVariable solutionTolerance_ = 1e-4;
+
 int main()
 {
     // Begin timing of execution
-    scalarVariable startTime = getWallTime();
+    const scalarVariable startTime = getWallTime();
 
     // Main solver loop
-    while (runTime(runTimeIterator, maxIterations, residualError, solutionTolerance) == true)
+    while (runTime(runTimeIterator_, maxIterations_, residualError_, solutionTolerance_) == true)
     {
         // Apply boundary conditions to omega
         boundaryConditions(omega, psi, dx, dy, meshDim);
@@ -46,17 +54,15 @@ int main()
         omegaPsiIntegrator(omega, omega_, psi, psi_, dx, dy, meshDim, dt, Re);
 
         // Get vorticity residual
-        getResidual(residualError, omega, omega_, meshDim, rowMax, currentRow);
-        printScalarVariable(residualError);
+        getResidual(residualError_, omega, omega_, meshDim, rowMax, currentRow);
+        printScalarVariable(residualError_);
 
         // Advance iterator
-        runTimeIterator++;
+        runTimeIterator_++;
     }
 
     // Finish timing of execution
-    scalarVariable endTime = getWallTime();
-
-    printScalarArray(omega, meshDim);
+    const scalarVariable endTime = getWallTime();
 
     // Print elapsed time to terminal
     printElapsedTime(startTime, endTime);
